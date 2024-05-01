@@ -4,7 +4,7 @@ import "./MoviesList.css"
 
 class MoviesList extends Component {
     render() {
-        const {movies} = this.props
+        const {movies, search} = this.props
         return (
             movies.length ?
             <div className="movies__list">
@@ -20,7 +20,7 @@ class MoviesList extends Component {
                 description={film.overview}
                 />)}
             </div>
-            : <div className="not_found">Ничего не нашлось...</div>
+            : <div className="not_found">по запросу "{search}" ничего не нашлось...</div>
         )
     }
 }

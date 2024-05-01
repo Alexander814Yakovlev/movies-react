@@ -2,6 +2,7 @@ import { Component } from "react";
 import './Main.css'
 import MoviesList from "../components/MoviesList";
 import Search from "../components/Search";
+import Pagination from "../components/Pagination";
 
 const API_KEY = process.env.REACT_APP_API_KEY
 
@@ -10,6 +11,10 @@ class Main extends Component {
         loading: true,
         movies : [],
         genres: [],
+        pages: 1,
+        currentPage: 1,
+        search: '',
+        type: '',
     }
 
     getGenres = () => {
@@ -26,7 +31,7 @@ class Main extends Component {
             .then(response => this.setState({genres: response.genres}))
     }
 
-    searchMovies = (query, type='multi') => {
+    searchMovies = (query, type='multi', page=1) => {
       this.setState({loading: true})
         const options = {
             method: 'GET',
@@ -36,9 +41,16 @@ class Main extends Component {
             }
           };
           
-          fetch(`https://api.themoviedb.org/3/search/${type}?query=${query}&include_adult=false&language=ru-RU&page=1`, options)
+          fetch(`https://api.themoviedb.org/3/search/${type}?query=${query}&include_adult=false&language=ru-RU&page=${page}`, options)
             .then(response => response.json())
-            .then(data => this.setState({movies: data.results, loading: false}))
+            .then(data => this.setState({
+                movies: data.results,
+                loading: false,
+                pages: data.total_pages,
+                search: query,
+                type: type,
+                currentPage: page,
+              }))
     }
 
     getTrendings = () => {
@@ -50,9 +62,9 @@ class Main extends Component {
             }
           };
           
-          fetch('https://api.themoviedb.org/3/trending/movie/day?language=ru-RU', options)
+          fetch(`https://api.themoviedb.org/3/trending/movie/day?language=ru-RU%`, options)
             .then(response => response.json())
-            .then(response => this.setState({movies: response.results, loading: false}))
+            .then(response => this.setState({movies: response.results, loading: false, pages: response.total_pages}))
     }
 
     componentDidMount = () => {
@@ -61,7 +73,7 @@ class Main extends Component {
     }
 
     render() {
-        const {movies, genres, loading} = this.state
+        const {movies, genres, loading, pages, currentPage, search, type} = this.state
         const preloader = (
             <div className="progress">
                 <div className="indeterminate"></div>
@@ -69,10 +81,19 @@ class Main extends Component {
         )
         return (
             <main className="container content">
-                <Search searchMovies={this.searchMovies}/>
+                <Search key="search"
+                        searchMovies={this.searchMovies}/>
                 {
-                    !loading ? <MoviesList movies={movies} genres={genres}/> : preloader
+                    !loading ? <MoviesList key="movies" movies={movies} genres={genres} search={search}/> : preloader
                 }
+                <Pagination
+                  key="pagination"
+                  searchMovies={this.searchMovies}
+                  pages={pages}
+                  currentPage={currentPage}
+                  search={search}
+                  type={type}
+                />
             </main>
         )
     }

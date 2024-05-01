@@ -1,0 +1,17 @@
+.pagination>li:not(:last-child) {
+    margin-right: 5px;
+}
+
+.pagination>li {
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.disabled {
+    cursor: default !important;
+    opacity: 0.4;
+}
+
+.active {
+    color: #fff;
+}

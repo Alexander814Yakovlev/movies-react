@@ -5,7 +5,7 @@ function Header() {
     return (
         <nav>
             <div className="nav-wrapper  light-blue accent-4">
-            <a href="/" className="brand-logo">
+            <a href="/movies-react" className="brand-logo">
                 <img src={logo} alt="Movies" />
             </a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
