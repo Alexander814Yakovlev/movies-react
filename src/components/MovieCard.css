@@ -1,0 +1,49 @@
+.card {
+    border-radius: 8px;
+}
+
+.card-image > img {
+    border-radius: 8px 8px 0 0 !important;
+}
+
+.description {
+    position: absolute;
+    top: 0;
+    background-color: #ffffffa9;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+}
+
+.card-content {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 20px;
+}
+
+.card__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.rating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.card-genres {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px 5px;
+}
+
+.genre {
+    border: 1px solid #000000;
+    border-radius: 4px;
+    padding: 2px;
+    cursor: pointer;
+}

@@ -1,0 +1,8 @@
+.nav-wrapper {
+    padding: 0 10px;
+}
+
+.brand-logo > img {
+    margin: 5px 0;
+    height: 50px;
+}

@@ -1,0 +1,37 @@
+.input-field {
+    display: flex;
+}
+
+.btn-floating {
+    position: absolute;
+    right: 10px;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.btn-floating:hover {
+    filter: drop-shadow(3px 2px 2px #ababab);
+}
+
+.btn-floating:active {
+    transform: translate(1px, 1px);
+}
+
+.btn-floating > i {
+    color: #b1afaf;
+}
+
+.radio {
+    position: absolute;
+    top: 45px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.radio-label>span {
+    display: flex;
+    flex-direction: column;
+}
